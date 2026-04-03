@@ -58,7 +58,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </div>
-      <p class="admin-hint">💡 ডিফল্ট পাসওয়ার্ড: <code>amaderGolpo</code></p>
+
     </div>
   </div>
 
@@ -185,10 +185,9 @@
       <p>আমাদের প্রথম স্মৃতি যোগ করুন</p>
     </div>
 
-    <!-- Admin Badge -->
-    <div class="admin-badge" id="adminBadge" style="display:none;">
-      <span>👑 Admin Mode</span>
-      <button class="admin-logout-btn" id="adminLogoutBtn">লগআউট</button>
+    <!-- Admin Badge (hidden — logout via lock icon) -->
+    <div id="adminBadge" style="display:none!important;">
+      <button id="adminLogoutBtn" style="display:none;"></button>
     </div>
 
     <!-- Footer -->
