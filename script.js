@@ -10,14 +10,15 @@ const CONFIG = {
   supabaseUrl:  "https://exjkutkqcsoxyjnimlhh.supabase.co",
   supabaseKey:  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4amt1dGtxY3NveHlqbmltbGhoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4NDU2NDgsImV4cCI6MjA4NzQyMTY0OH0.blV_tGKnx_Q6LqSqx4-K1ioLCaBgrCLkpuNEeHQJD9s",
 
-  // ——— Admin Password Config ———
-  // Default password: amaderGolpo
-  // To change: run sha256("newpassword") in browser console and update below
-  // How to generate: copy-paste into console:
-  //   async function h(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
-  //   h("yourNewPassword").then(console.log)
-  adminPasswordHash: "a5f2e4a6f56b0c9e28e2d2fb04db9f4a1e2b6c3d8f0e1a7b9c2d5e4f3a1b6c8d", // sha256 of "amaderGolpo"
+  // Admin password hash (sha256)
+  adminPasswordHash: "",
 };
+
+// On first run, compute and store the correct hash
+(async () => {
+  const correctHash = await sha256("Areen143");
+  CONFIG.adminPasswordHash = correctHash;
+})();
 
 // ——— SHA-256 Helper ———
 async function sha256(message) {
@@ -26,13 +27,6 @@ async function sha256(message) {
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
 }
-
-// On first run, compute the correct hash for "amaderGolpo" and store it
-// This avoids hardcoding a potentially wrong hash
-(async () => {
-  const correctHash = await sha256("amaderGolpo");
-  CONFIG.adminPasswordHash = correctHash;
-})();
 
 // ——— Init Supabase ———
 const db = supabase.createClient(CONFIG.supabaseUrl, CONFIG.supabaseKey);
@@ -77,11 +71,9 @@ let isAdmin = sessionStorage.getItem("amaderGolpoAdmin") === "1";
 // ——— Apply Admin UI on load ———
 function applyAdminUI() {
   if (isAdmin) {
-    adminBadge.style.display = "flex";
     adminTriggerBtn.classList.add("active-admin");
-    adminTriggerBtn.title = "Admin Mode Active";
+    adminTriggerBtn.title = "Admin Mode Active — ক্লিক করুন লগআউট করতে";
   } else {
-    adminBadge.style.display = "none";
     adminTriggerBtn.classList.remove("active-admin");
     adminTriggerBtn.title = "Admin Login";
   }
