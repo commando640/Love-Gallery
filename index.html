@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>আমাদের গল্প ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Background -->
+  <div class="ambient-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Floating Hearts -->
+  <div class="hearts-bg" id="heartsBg"></div>
+
+  <!-- Loading Screen -->
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-heart">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z" fill="currentColor"/>
+      </svg>
+    </div>
+    <p class="loading-text">আমাদের গল্প লোড হচ্ছে...</p>
+  </div>
+
+  <!-- Admin Login Modal -->
+  <div id="adminModal" class="admin-modal">
+    <div class="admin-modal-overlay" id="adminModalOverlay"></div>
+    <div class="admin-modal-box">
+      <button class="admin-modal-close" id="adminModalClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      <div class="admin-modal-icon">👑</div>
+      <h2 class="admin-modal-title">Admin Access</h2>
+      <p class="admin-modal-subtitle">শুধুমাত্র অনুমোদিত ব্যক্তির জন্য</p>
+      <div class="admin-modal-form">
+        <div class="password-field">
+          <input type="password" id="adminPasswordInput" class="admin-pass-input" placeholder="পাসওয়ার্ড দিন..." autocomplete="current-password">
+          <button class="pass-toggle" id="passToggle" type="button">
+            <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+        <p class="admin-error" id="adminError"></p>
+        <button class="admin-login-btn" id="adminLoginBtn">
+          <span>প্রবেশ করুন</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      <p class="admin-hint">💡 ডিফল্ট পাসওয়ার্ড: <code>amaderGolpo</code></p>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <div class="lightbox-overlay"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      <button class="lightbox-nav prev" id="lbPrev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <button class="lightbox-nav next" id="lbNext">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+      <div class="lightbox-media-wrap" id="lightboxMedia"></div>
+      <div class="lightbox-counter" id="lightboxCounter"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Main App -->
+  <div class="app-wrap">
+
+    <!-- Header -->
+    <header class="site-header">
+      <div class="header-deco">
+        <span class="deco-line"></span>
+        <span class="deco-icon">❤</span>
+        <span class="deco-line"></span>
+      </div>
+      <h1 class="site-title">
+        <span class="title-bn">আমাদের গল্প</span>
+        <span class="title-sub">Our Beautiful Story, Forever & Always</span>
+      </h1>
+      <p class="site-tagline">প্রতিটি মুহূর্ত, একটি স্মৃতি — Every moment, a memory we keep forever</p>
+
+      <!-- Subtle Admin Button -->
+      <button class="admin-trigger-btn" id="adminTriggerBtn" title="Admin Login">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0110 0v4"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Upload Section -->
+    <div class="upload-section">
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+        </div>
+        <p class="drop-title">আমাদের স্মৃতি যোগ করুন</p>
+        <p class="drop-hint">ছবি বা ভিডিও বেছে নিন</p>
+        <label for="fileInput" class="upload-btn">
+          <span class="upload-btn-icon">📸</span>
+          <span class="upload-btn-text">স্মৃতি যোগ করুন</span>
+        </label>
+        <input type="file" id="fileInput" hidden multiple accept="image/*,video/*">
+      </div>
+
+      <div class="progress-wrap" id="progressWrap" style="display:none;">
+        <div class="progress-bar-outer">
+          <div class="progress-bar-inner" id="progressBar"></div>
+        </div>
+        <p class="progress-label" id="progressLabel">আপলোড হচ্ছে...</p>
+      </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar" id="statsBar">
+      <div class="stat-item">
+        <span class="stat-number" id="totalCount">0</span>
+        <span class="stat-label">স্মৃতি</span>
+      </div>
+      <div class="stat-divider">❤</div>
+      <div class="stat-item">
+        <span class="stat-number" id="photoCount">0</span>
+        <span class="stat-label">ছবি</span>
+      </div>
+      <div class="stat-divider">❤</div>
+      <div class="stat-item">
+        <span class="stat-number" id="videoCount">0</span>
+        <span class="stat-label">ভিডিও</span>
+      </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">সব</button>
+      <button class="filter-btn" data-filter="image">📷 ছবি</button>
+      <button class="filter-btn" data-filter="video">🎬 ভিডিও</button>
+    </div>
+
+    <!-- Gallery -->
+    <div id="gallery" class="gallery">
+      <div class="gallery-skeleton">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card sk-tall"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card sk-tall"></div>
+        <div class="skeleton-card"></div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="empty-state" style="display:none;">
+      <div class="empty-icon">📷</div>
+      <h3>এখনো কোনো স্মৃতি নেই</h3>
+      <p>আমাদের প্রথম স্মৃতি যোগ করুন</p>
+    </div>
+
+    <!-- Admin Badge -->
+    <div class="admin-badge" id="adminBadge" style="display:none;">
+      <span>👑 Admin Mode</span>
+      <button class="admin-logout-btn" id="adminLogoutBtn">লগআউট</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-heart">❤</div>
+      <p>তোমাকে ভালোবাসি — I love you, always.</p>
+      <p class="footer-copy">Made with love · আমাদের গল্প ∞</p>
+    </footer>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
